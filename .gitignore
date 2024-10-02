@@ -1,0 +1,4 @@
+**/node_modules/
+**/.next/
+site/client/package-lock.json
+**/.DS_Store

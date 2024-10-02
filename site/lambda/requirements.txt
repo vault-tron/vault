@@ -1,0 +1,4 @@
+boto3==1.28.84
+web3==6.11.3
+eth-account==0.9.0
+pyotp==2.9.0
