@@ -110,7 +110,7 @@ export default function HeroSection({ goToNext }) {
       <div>
         <div className="mt-10 backdrop-filter-[8px] inline-flex h-6 items-center justify-between rounded-full border border-white/5 bg-white/10 px-2 text-xs text-white transition-all ease-in hover:bg-white/20 group gap-1 translate-y-[-0.5rem] opacity-100 cursor-pointer select-none">
           <a
-            href="https://github.com/"
+            href="https://github.com/vault-tron/vault"
             target="_blank"
             rel="noopener noreferrer"
           >

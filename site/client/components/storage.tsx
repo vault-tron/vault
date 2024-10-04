@@ -1462,7 +1462,7 @@ export const StorageProvider: React.FC<{ children: React.ReactNode }> = ({
       toast.success(
         "Recovery successfully completed for " +
           username +
-          ". You have been airdroped an additional 10000 VAULT tokens."
+          ". You have been airdropped an additional 10000 VAULT tokens."
       );
       return tx;
     } catch (error) {

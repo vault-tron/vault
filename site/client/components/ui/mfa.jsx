@@ -182,7 +182,7 @@ export function MFASetup({ goToNext }) {
               }
             } else {
               toast.success(
-                "You have successfully registered and been airdroped 10000 VAULT tokens",
+                "You have successfully registered and been airdropped 10000 VAULT tokens",
               );
               goToNext();
             }

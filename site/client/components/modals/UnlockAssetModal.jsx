@@ -266,6 +266,8 @@ export function UnlockAssetModal({
   setErrorMessage,
 }) {
 
+  const { batchUnlockAndVerifyMFA } = useStorage();
+  
   useEffect(() => {}, [selectedRow]);
 
   useEffect(() => {
