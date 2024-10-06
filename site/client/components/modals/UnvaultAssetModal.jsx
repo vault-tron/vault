@@ -12,6 +12,7 @@ import { Password } from "../svg/password";
 import { useStorage } from "../storage";
 import { authOptionsDefault } from "../constants";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { toast } from "sonner";
 
 const VaultSection = ({
   authOptions,
@@ -185,6 +186,9 @@ const AuthSelection = ({ authOption, authOptions, setAuthOptions }) => {
                       confirmOTP(otpValue);
                       setShowInput(!showInput);
                       setCompleted(!completed);
+                      setAuthOptions(authOptions.map(a => 
+                        a.address === authOption.address ? { ...a, checked: !a.checked } : a
+                      ));
                     }}
                   >
                     Confirm
@@ -219,6 +223,9 @@ const AuthSelection = ({ authOption, authOptions, setAuthOptions }) => {
                     className="w-auto"
                     onClick={() => {
                       setShowInput(!showInput);
+                      setAuthOptions(authOptions.map(a => 
+                        a.address === authOption.address ? { ...a, checked: !a.checked } : a
+                      ));
                       setCompleted(!completed);
                       confirmOTP(payload);
                     }}
@@ -244,6 +251,9 @@ const AuthSelection = ({ authOption, authOptions, setAuthOptions }) => {
                     className="w-auto"
                     onClick={() => {
                       setShowInput(!showInput);
+                      setAuthOptions(authOptions.map(a => 
+                        a.address === authOption.address ? { ...a, checked: !a.checked } : a
+                      ));
                       setCompleted(!completed);
                       confirmOTP(password);
                     }}
@@ -359,6 +369,11 @@ export function UnvaultAssetModal({
       const mfaProviders = authOptions.map((a) => a.address);
       console.log(`mfaProviders: ${mfaProviders}`);
       console.log(`payload: ${payload}`);
+      if (!customZKPass && !otpValue1 && !otpValue2 && !payload) {
+        toast.error("Please complete all unvault security layers before continuing.");
+        setButtonText("Unvault");
+        return;
+      }
       await batchUnvaultAndVerifyMFA(
         selectedRow.tokenAddress,
         rawBalanceNumber.toString(),

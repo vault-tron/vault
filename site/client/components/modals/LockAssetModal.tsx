@@ -135,15 +135,15 @@ const TimeSection = ({
         </div>
 
         <div className="w-full flex items-center justify-center">
-          <Button
-            // className="bg-gradient-to-b relative group/btn from-sky-900  to-slate-900 block  w-2/3 text-white rounded-md h-10 font-medium"
-            className="relative py-2 h-2/3 w-auto text-black rounded-md font-medium px-12"
-            type="submit"
-            onClick={handleNext}
-          >
-            Next
-            <BottomGradient />
-          </Button>
+            <Button
+              className="relative py-2 h-2/3 w-auto text-black rounded-md font-medium px-12"
+              type="submit"
+              onClick={handleNext}
+              disabled={!lockDate || (!lockTime && fullDateTime !== "Forever")}
+            >
+              Next
+              <BottomGradient />
+            </Button>
         </div>
       </div>
     </>
@@ -188,15 +188,15 @@ const VaultSection = ({
         </div>
 
         <div className="w-full flex items-center justify-center">
-          <Button
+        <Button
             // className="bg-gradient-to-b relative group/btn from-sky-900  to-slate-900 block  w-2/3 text-white rounded-md h-10 font-medium"
-            className="relative py-2 h-2/3 w-auto text-black rounded-md font-medium px-12"
+            className="relative py-2 h-2/3 w-auto text-black rounded-md font-medium px-12 mt-8"
             type="submit"
             onClick={handleNext}
-          >
+            disabled={authOptions.filter((authOption: any) => authOption.checked).length === 0}
+            >
             Next
-            <BottomGradient />
-          </Button>
+            </Button>
         </div>
         <div className="text-xs w-full text-center mt-8">
           &#x26A0; {`Each additional MFA method will cost 1 VAULT token.`}
@@ -439,7 +439,7 @@ export function LockAssetModal({
           .filter((obj) => obj.checked)
           .map((a) => a.address);
 
-        let customApiUrl = authOptions.find((a) => a.custom && a.checked)?.otp;
+        let customApiUrl = authOptions.find((a) => a.api)?.otp;
         if (!customApiUrl) {
           customApiUrl = ""
         }
@@ -468,7 +468,8 @@ export function LockAssetModal({
       setErrorMessage(
         `There was an error with the transaction: ${e.toString()}`
       );
-      setButtonText("Vault");
+      console.error(e);
+      setButtonText("Lock");
     }
   };
 

@@ -353,13 +353,11 @@ export function UnlockAssetModal({
 
       const mfaProviders = authOptions.map((a) => a.address);
 
-      console.log("Token Address:", selectedRow.tokenAddress);
-      console.log("Is ERC20:", selectedRow.isERC20);
-      console.log("Custom ZK Password:", customZKPass);
-      console.log("Google Authenticator OTP:", otpValue1);
-      console.log("Microsoft Authenticator OTP:", otpValue2);
-      console.log("MFA Providers:", mfaProviders);
-      console.log("Custom API Payload:", customApiPayload);
+      if (!customZKPass && !otpValue1 && !otpValue2 && !payload) {
+        toast.error("Please complete all unvault security layers before continuing.");
+        setButtonText("Unvault");
+        return;
+      }
 
       await batchUnlockAndVerifyMFA(
         selectedRow.tokenAddress,
